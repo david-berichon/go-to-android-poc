@@ -20,6 +20,12 @@ include $(CLEAR_VARS)
 EXT_LIB_ROOT := $(LOCAL_PATH)/../../../../distribution
 
 # import 2 libs: remember to generate them SEPARATELY in terminal/command line first!
+LOCAL_MODULE := local_gohello
+LOCAL_SRC_FILES := $(EXT_LIB_ROOT)/gohello/lib/$(TARGET_ARCH_ABI)/libgohello.a
+LOCAL_EXPORT_C_INCLUDES := $(EXT_LIB_ROOT)/gohello/include
+include $(PREBUILT_STATIC_LIBRARY)
+
+# import 2 libs: remember to generate them SEPARATELY in terminal/command line first!
 LOCAL_MODULE := local_gmath
 LOCAL_SRC_FILES := $(EXT_LIB_ROOT)/gmath/lib/$(TARGET_ARCH_ABI)/libgmath.a
 LOCAL_EXPORT_C_INCLUDES := $(EXT_LIB_ROOT)/gmath/include
@@ -37,7 +43,7 @@ LOCAL_CFLAGS := -std=gnu++11
 LOCAL_MODULE    := hello-libs
 LOCAL_SRC_FILES := hello-libs.cpp
 LOCAL_LDLIBS    := -llog -landroid
-LOCAL_STATIC_LIBRARIES := local_gmath
+LOCAL_STATIC_LIBRARIES := local_gmath local_gohello
 LOCAL_SHARED_LIBRARIES := local_gperf
 
 include $(BUILD_SHARED_LIBRARY)
