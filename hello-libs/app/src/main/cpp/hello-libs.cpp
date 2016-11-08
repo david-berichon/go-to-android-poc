@@ -20,6 +20,7 @@
 #include <android/log.h>
 #include <gmath.h>
 #include <gperf.h>
+#include <gohello.h>
 
 
 #define LOGI(...) \
@@ -45,5 +46,5 @@ Java_com_example_hellolibs_MainActivity_stringFromJNI(JNIEnv *env, jobject thiz)
 
     LOGI("calculation time: %" PRIu64, ticks);
 
-    return env->NewStringUTF("Hello from JNI!");
+    return env->NewStringUTF(Reverse("Hello from JNI!"));
 }
