@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// export Reverse
+//export Reverse
 func Reverse(s *C.char) *C.char {
 	C.srand(C.uint(time.Now().Nanosecond()))
 	fmt.Println(C.rand())
