@@ -1,6 +1,7 @@
 export GOPATH=$(CURDIR)/go
 
-all:POC
+all:
+	docker run --rm -v $(CURDIR):$(CURDIR) -w $(CURDIR) dbndev/go-to-android-poc-env make POC
 
 hello.so: 
 	CGO_ENABLED=1 \
@@ -21,5 +22,8 @@ hello.a:
 POC: hello.a
 	cd hello-libs/gen-libs && ./gen_lib.sh
 	mkdir -p hello-libs/distribution/gohello/include
-	cp hello.h hello-libs/distribution/gohello/include
-	cp hello.a hello-libs/distribution/gohello/lib/armeabi-v7a
+	mkdir -p hello-libs/distribution/gohello/lib/armeabi-v7a
+	mv hello.h hello-libs/distribution/gohello/include/gohello.h
+	mv hello.a hello-libs/distribution/gohello/lib/armeabi-v7a/libgohello.a
+	cd hello-libs && ./gradlew && ./gradlew build
+
