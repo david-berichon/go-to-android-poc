@@ -1,9 +1,14 @@
 FROM dbndev/openjdk-base
 
+MAINTAINER david.berichon@ercom.fr
+
 RUN apt-get update && apt-get install -y \
  curl \
  unzip \
+ gcc \
  make \
+ lib32stdc++6 \
+ lib32z1 \
  python
 
 # Add new non-admin user
@@ -57,8 +62,7 @@ RUN mkdir $ANDROID_STANDALONE_TOOLCHAINS_PATH \
 
 # Install go to standard location (need root privileges)
 USER root
-RUN curl https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz \
-  | tar xz -C /usr/local
+RUN curl https://storage.googleapis.com/golang/go1.7.3.linux-amd64.tar.gz | tar xz -C /usr/local
 ENV PATH ${PATH}:/usr/local/go/bin
 
 USER user
